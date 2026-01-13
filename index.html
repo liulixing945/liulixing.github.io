@@ -61,6 +61,21 @@
             .has-tooltip:hover .tooltip {
                 @apply visible opacity-100 z-50;
             }
+            .weather-neon {
+                @apply text-black rounded border bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 to-purple-500;
+            }
+            .weather-purple {
+                @apply text-white rounded border bg-purple-600;
+            }
+            .weather-bg-light-gray {
+                @apply bg-gray-200 text-black rounded p-0.5;
+            }
+            .weather-bg-light-green {
+                @apply bg-green-200 text-black rounded p-0.5;
+            }
+            .weather-bg-light-blue {
+                @apply bg-blue-200 text-black rounded p-0.5;
+            }
         }
     </style>
     <script>
@@ -159,11 +174,11 @@
                         <div>
                             <label class="block text-gray-700 mb-2 font-medium">基础突变</label>
                             <div class="grid grid-cols-2 gap-2">
-                                <button class="mutation-btn bg-gray-200 p-2 rounded-lg text-center hover:bg-gray-300 transition-colors" data-type="normal" data-value="1">普通 (×1)</button>
-                                <button class="mutation-btn bg-gray-400 text-white p-2 rounded-lg text-center hover:bg-gray-500 transition-colors" data-type="silver" data-value="3">银色 (×3)</button>
-                                <button class="mutation-btn bg-yellow-400 p-2 rounded-lg text-center hover:bg-yellow-500 transition-colors" data-type="gold" data-value="10">金色 (×10)</button>
-                                <button class="mutation-btn bg-blue-200 p-2 rounded-lg text-center hover:bg-blue-300 transition-colors" data-type="crystal" data-value="20">水晶 (×20)</button>
-                                <button class="mutation-btn bg-purple-300 p-2 rounded-lg text-center hover:bg-purple-400 transition-colors" data-type="streamer" data-value="30">流光 (×30)</button>
+                                <button class="mutation-btn bg-gray-200 p-2 rounded-lg text-center hover:bg-gray-300 transition-colors" data-type="normal" data-value="1">普通</button>
+                                <button class="mutation-btn bg-gray-400 text-white p-2 rounded-lg text-center hover:bg-gray-500 transition-colors" data-type="silver" data-value="3">银色</button>
+                                <button class="mutation-btn bg-yellow-400 p-2 rounded-lg text-center hover:bg-yellow-500 transition-colors" data-type="gold" data-value="10">金色</button>
+                                <button class="mutation-btn bg-blue-200 p-2 rounded-lg text-center hover:bg-blue-300 transition-colors" data-type="crystal" data-value="20">水晶</button>
+                                <button class="mutation-btn bg-purple-300 p-2 rounded-lg text-center hover:bg-purple-400 transition-colors" data-type="streamer" data-value="30">流光</button>
                             </div>
                         </div>
                         
@@ -204,89 +219,97 @@
                             <div id="weatherCount" class="text-sm text-gray-600 mb-2">已勾选0个天气</div>
                             
                             <div class="grid grid-cols-2 gap-2 max-h-[200px] overflow-y-auto p-2 border border-gray-200 rounded-lg">
+                                <!-- 倍数1 -->
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-颤栗" class="weather-checkbox mr-2" data-value="1">
-                                    <label for="weather-颤栗">颤栗</label>
+                                    <label for="weather-颤栗" class="weather-bg-light-gray">颤栗</label>
                                 </div>
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-潮湿" class="weather-checkbox mr-2" data-value="1">
-                                    <label for="weather-潮湿">潮湿</label>
+                                    <label for="weather-潮湿" class="weather-bg-light-gray">潮湿</label>
                                 </div>
+                                <!-- 倍数2 -->
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-覆雪" class="weather-checkbox mr-2" data-value="2">
-                                    <label for="weather-覆雪">覆雪</label>
+                                    <label for="weather-覆雪" class="weather-bg-light-gray">覆雪</label>
                                 </div>
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-迷雾" class="weather-checkbox mr-2" data-value="2">
-                                    <label for="weather-迷雾">迷雾</label>
+                                    <label for="weather-迷雾" class="weather-bg-light-gray">迷雾</label>
                                 </div>
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-灼热" class="weather-checkbox mr-2" data-value="2">
-                                    <label for="weather-灼热">灼热</label>
+                                    <label for="weather-灼热" class="weather-bg-light-gray">灼热</label>
                                 </div>
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-生机" class="weather-checkbox mr-2" data-value="2">
-                                    <label for="weather-生机">生机</label>
+                                    <label for="weather-生机" class="weather-bg-light-gray">生机</label>
                                 </div>
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-沙尘" class="weather-checkbox mr-2" data-value="2">
-                                    <label for="weather-沙尘">沙尘</label>
+                                    <label for="weather-沙尘" class="weather-bg-light-gray">沙尘</label>
                                 </div>
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-结霜" class="weather-checkbox mr-2" data-value="2">
-                                    <label for="weather-结霜">结霜</label>
+                                    <label for="weather-结霜" class="weather-bg-light-gray">结霜</label>
                                 </div>
+                                <!-- 倍数3 -->
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-落雷" class="weather-checkbox mr-2" data-value="3">
-                                    <label for="weather-落雷">落雷</label>
+                                    <label for="weather-落雷" class="weather-bg-light-green">落雷</label>
                                 </div>
-                                <div class="weather-item flex items-center">
-                                    <input type="checkbox" id="weather-血月" class="weather-checkbox mr-2" data-value="5">
-                                    <label for="weather-血月">血月</label>
-                                </div>
-                                <div class="weather-item flex items-center">
-                                    <input type="checkbox" id="weather-幽魂" class="weather-checkbox mr-2" data-value="5">
-                                    <label for="weather-幽魂">幽魂</label>
-                                </div>
-                                <div class="weather-item flex items-center">
-                                    <input type="checkbox" id="weather-惊魂夜" class="weather-checkbox mr-2" data-value="5">
-                                    <label for="weather-惊魂夜">惊魂夜</label>
-                                </div>
-                                <div class="weather-item flex items-center">
-                                    <input type="checkbox" id="weather-彩虹" class="weather-checkbox mr-2" data-value="5">
-                                    <label for="weather-彩虹">彩虹</label>
-                                </div>
-                                <div class="weather-item flex items-center">
-                                    <input type="checkbox" id="weather-荧光" class="weather-checkbox mr-2" data-value="5">
-                                    <label for="weather-荧光">荧光</label>
-                                </div>
-                                <div class="weather-item flex items-center">
-                                    <input type="checkbox" id="weather-极光" class="weather-checkbox mr-2" data-value="5">
-                                    <label for="weather-极光">极光</label>
-                                </div>
+                                <!-- 倍数4 -->
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-冰冻" class="weather-checkbox mr-2" data-value="4">
-                                    <label for="weather-冰冻">冰冻</label>
+                                    <label for="weather-冰冻" class="weather-bg-light-green">冰冻</label>
                                 </div>
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-陶化" class="weather-checkbox mr-2" data-value="4">
-                                    <label for="weather-陶化">陶化</label>
+                                    <label for="weather-陶化" class="weather-bg-light-green">陶化</label>
                                 </div>
+                                <!-- 倍数5 -->
+                                <div class="weather-item flex items-center">
+                                    <input type="checkbox" id="weather-幽魂" class="weather-checkbox mr-2" data-value="5">
+                                    <label for="weather-幽魂" class="weather-bg-light-blue">幽魂</label>
+                                </div>
+                                <div class="weather-item flex items-center">
+                                    <input type="checkbox" id="weather-惊魂夜" class="weather-checkbox mr-2" data-value="5">
+                                    <label for="weather-惊魂夜" class="weather-bg-light-blue">惊魂夜</label>
+                                </div>
+                                <div class="weather-item flex items-center">
+                                    <input type="checkbox" id="weather-彩虹" class="weather-checkbox mr-2" data-value="5">
+                                    <label for="weather-彩虹" class="weather-bg-light-blue">彩虹</label>
+                                </div>
+                                <div class="weather-item flex items-center">
+                                    <input type="checkbox" id="weather-荧光" class="weather-checkbox mr-2" data-value="5">
+                                    <label for="weather-荧光" class="weather-bg-light-blue">荧光</label>
+                                </div>
+                                <div class="weather-item flex items-center">
+                                    <input type="checkbox" id="weather-极光" class="weather-checkbox mr-2" data-value="5">
+                                    <label for="weather-极光" class="weather-bg-light-blue">极光</label>
+                                </div>
+                                <div class="weather-item flex items-center">
+                                    <input type="checkbox" id="weather-血月" class="weather-checkbox mr-2" data-value="5">
+                                    <label for="weather-血月" class="weather-bg-light-blue">血月</label>
+                                </div>
+                                <!-- 倍数8 -->
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-瓷化" class="weather-checkbox mr-2" data-value="8">
-                                    <label for="weather-瓷化">瓷化</label>
+                                    <label for="weather-瓷化" class="weather-purple px-1">瓷化</label>
                                 </div>
+                                <!-- 倍数10 -->
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-星环" class="weather-checkbox mr-2" data-value="10">
-                                    <label for="weather-星环">星环</label>
+                                    <label for="weather-星环" class="weather-purple px-1">星环</label>
                                 </div>
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-亮晶晶" class="weather-checkbox mr-2" data-value="10">
-                                    <label for="weather-亮晶晶">亮晶晶</label>
+                                    <label for="weather-亮晶晶" class="weather-purple px-1">亮晶晶</label>
                                 </div>
+                                <!-- 倍数18 -->
                                 <div class="weather-item flex items-center">
                                     <input type="checkbox" id="weather-霓虹" class="weather-checkbox mr-2" data-value="18">
-                                    <label for="weather-霓虹">霓虹</label>
+                                    <label for="weather-霓虹" class="weather-neon px-1">霓虹</label>
                                 </div>
                             </div>
                         </div>
@@ -316,9 +339,7 @@
                                     <span class="text-gray-800 font-bold">最终价格约:</span>
                                     <span id="finalPrice" class="text-2xl font-bold text-price-high">0.03万</span>
                                 </div>
-                                <div class="text-right text-sm text-gray-500">
-                                    <span id="errorTip">有2百万误差</span>
-                                </div>
+
                             </div>
                         </div>
                         
@@ -572,6 +593,55 @@
             '竹子': 12
         };
         
+        // 作物最大重量映射（单位：kg）
+        const cropMaxWeight = {
+            // 5kg max
+            '香菇': 5,
+            '大豆': 5,
+            
+            // 15kg max
+            '牵牛花': 15,
+            '棉花': 15,
+            '草莓': 15,
+            '番茄': 15,
+            '白菜': 15,
+            '车厘子': 15,
+            '香蕉': 15,
+            '大王菊': 15,
+            '葡萄': 15,
+            '惊奇蘑': 15,
+            '魔鬼朝天椒': 15,
+            
+            // 20kg max
+            '土豆': 20,
+            '猕猴桃': 20,
+            '松果': 20,
+            '黄瓜': 20,
+            '梨': 20,
+            '橘子': 20,
+            
+            // 30kg max
+            '蟠桃': 30,
+            '石榴': 30,
+            '荔枝': 30,
+            
+            // 50kg max
+            '波斯菊': 50,
+            '仙人掌象': 50,
+            '苹果': 50,
+            '玉米': 50,
+            '椰子': 50,
+            
+            // 70kg max
+            '向日葵': 70,
+            '榴莲': 70,
+            
+            // 225kg max
+            '竹子': 225,
+            '西瓜': 225,
+            '南瓜': 225
+        };
+        
         const specialMutationData = {
             '土豆': { '薯片': 1.5 },
             '黄瓜': { '黄瓜蛇': 2 },
@@ -665,11 +735,34 @@
         
         // 初始化函数
         function init() {
+            // 更新重量限制函数
+            function updateWeightLimit() {
+                const selectedCrop = cropSelect.value;
+                const maxWeight = cropMaxWeight[selectedCrop] || 225; // 默认225kg
+                
+                // 更新滑块和输入框的最大值
+                weightSlider.max = maxWeight;
+                weightInput.max = maxWeight;
+                
+                // 如果当前重量超过最大重量，重置为最大重量
+                let currentWeight = parseFloat(weightSlider.value);
+                if (currentWeight > maxWeight) {
+                    currentWeight = maxWeight;
+                    weightSlider.value = currentWeight;
+                    weightInput.value = currentWeight;
+                    calculatePrice();
+                }
+            }
+            
             // 作物选择事件
             cropSelect.addEventListener('change', () => {
                 updateSpecialMutations();
+                updateWeightLimit();
                 calculatePrice();
             });
+            
+            // 初始化时设置重量限制
+            updateWeightLimit();
             
             // 重量滑块与输入框联动
             weightSlider.addEventListener('input', () => {
@@ -682,10 +775,11 @@
             // 重量输入框事件
             weightInput.addEventListener('input', () => {
                 let value = parseFloat(weightInput.value);
+                const maxWeight = parseFloat(weightInput.max);
                 
                 // 验证输入值
                 if (isNaN(value) || value < 0.01) value = 0.01;
-                if (value > 230) value = 230;
+                if (value > maxWeight) value = maxWeight;
                 
                 // 确保是0.1的倍数
                 const roundedValue = Math.round(value * 10) / 10;
@@ -700,10 +794,11 @@
             // 重量增加按钮事件
             weightUp.addEventListener('click', () => {
                 let value = parseFloat(weightInput.value);
+                const maxWeight = parseFloat(weightInput.max);
                 value += 0.1;
                 
                 // 验证输入值
-                if (value > 230) value = 230;
+                if (value > maxWeight) value = maxWeight;
                 
                 // 确保是0.1的倍数
                 const roundedValue = Math.round(value * 10) / 10;
@@ -910,7 +1005,7 @@
             noBtn.className = 'special-mutation-btn bg-gray-200 p-2 rounded-lg text-center hover:bg-gray-300 transition-colors ring-2 ring-blue-500';
             noBtn.dataset.type = 'none';
             noBtn.dataset.value = '1';
-            noBtn.textContent = '无特殊突变 (×1)';
+            noBtn.textContent = '无特殊突变';
             noBtn.addEventListener('click', () => {
                 document.querySelectorAll('.special-mutation-btn').forEach(b => b.classList.remove('ring-2', 'ring-blue-500'));
                 noBtn.classList.add('ring-2', 'ring-blue-500');
@@ -927,7 +1022,7 @@
                     btn.className = 'special-mutation-btn bg-gray-200 p-2 rounded-lg text-center hover:bg-gray-300 transition-colors';
                     btn.dataset.type = name;
                     btn.dataset.value = value;
-                    btn.textContent = `${name} (×${value})`;
+                    btn.textContent = name;
                     btn.addEventListener('click', () => {
                         document.querySelectorAll('.special-mutation-btn').forEach(b => b.classList.remove('ring-2', 'ring-blue-500'));
                         btn.classList.add('ring-2', 'ring-blue-500');
@@ -966,14 +1061,7 @@
             weatherBonusEl.textContent = weatherBonus.toFixed(2);
             finalPriceEl.textContent = formatNumber(finalPrice);
             
-            // 根据最终价格数值显示或隐藏误差提示
-            const errorTip = document.getElementById('errorTip');
-            if (finalPrice >= 10000000 && finalPrice < 100000000) {
-                errorTip.style.display = 'inline';
-                errorTip.textContent = '有2百万误差';
-            } else {
-                errorTip.style.display = 'none';
-            }
+
             
             // 价格颜色分级
             if (finalPrice >= 1000000) {
