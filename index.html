@@ -138,13 +138,19 @@
                         <!-- 重量输入 -->
                         <div>
                             <label class="block text-gray-700 mb-2 font-medium">重量 (kg)</label>
-                            <div class="flex items-center">
-                                <input type="range" id="weightSlider" min="0.01" max="230" step="0.1" value="10.0" class="w-full mr-4">
+                            <div class="flex items-center flex-wrap">
+                                <input type="range" id="weightSlider" min="0.01" max="230" step="0.1" value="10.0" class="w-[calc(100%-160px)] mr-4 mb-2">
                                 <div class="flex items-center">
-                                    <input type="number" id="weightInt" min="0" max="230" step="1" value="10" class="w-[80px] text-right px-2 py-1 border border-gray-300 rounded-l input-focus">
-                                    <span class="px-1">.</span>
-                                    <input type="number" id="weightDec" min="0" max="99" step="1" value="0" class="w-[60px] text-right px-2 py-1 border border-gray-300 rounded-r input-focus">
+                                    <input type="number" id="weightInput" min="0.01" max="230" step="0.1" value="10.0" class="w-[80px] text-right px-2 py-1 border border-gray-300 rounded-lg input-focus">
                                     <span class="ml-1">kg</span>
+                                    <div class="ml-2 flex flex-col">
+                                        <button type="button" id="weightUp" class="p-1 hover:bg-gray-100 rounded-full" title="增加">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </button>
+                                        <button type="button" id="weightDown" class="p-1 hover:bg-gray-100 rounded-full" title="减少">
+                                            <i class="fa fa-chevron-down"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -193,6 +199,9 @@
                                     <button id="saveToPreset2" class="btn-save-preset">保存到预设2</button>
                                 </div>
                             </div>
+                            
+                            <!-- 勾选数量显示 -->
+                            <div id="weatherCount" class="text-sm text-gray-600 mb-2">已勾选0个天气</div>
                             
                             <div class="grid grid-cols-2 gap-2 max-h-[200px] overflow-y-auto p-2 border border-gray-200 rounded-lg">
                                 <div class="weather-item flex items-center">
@@ -620,8 +629,9 @@
         // DOM元素获取
         const cropSelect = document.getElementById('cropSelect');
         const weightSlider = document.getElementById('weightSlider');
-        const weightInt = document.getElementById('weightInt');
-        const weightDec = document.getElementById('weightDec');
+        const weightInput = document.getElementById('weightInput');
+        const weightUp = document.getElementById('weightUp');
+        const weightDown = document.getElementById('weightDown');
         const mutationBtns = document.querySelectorAll('.mutation-btn');
         const weatherCheckboxes = document.querySelectorAll('.weather-checkbox');
         const specialMutationContainer = document.getElementById('specialMutationContainer');
@@ -665,47 +675,63 @@
             weightSlider.addEventListener('input', () => {
                 const value = parseFloat(weightSlider.value);
                 const roundedValue = Math.round(value * 10) / 10; // 确保是0.1的倍数
-                const intPart = Math.floor(roundedValue);
-                const decPart = Math.round((roundedValue - intPart) * 10);
-                weightInt.value = intPart;
-                weightDec.value = decPart;
+                weightInput.value = roundedValue;
                 calculatePrice();
             });
             
-            // 整数输入框事件
-            weightInt.addEventListener('input', () => {
-                updateWeightFromInputs();
-            });
-            
-            // 小数输入框事件
-            weightDec.addEventListener('input', () => {
-                updateWeightFromInputs();
-            });
-            
-            // 从输入框更新重量值
-            function updateWeightFromInputs() {
-                let intValue = parseInt(weightInt.value);
-                let decValue = parseInt(weightDec.value);
+            // 重量输入框事件
+            weightInput.addEventListener('input', () => {
+                let value = parseFloat(weightInput.value);
                 
-                // 验证整数部分
-                if (isNaN(intValue) || intValue < 0) intValue = 0;
-                if (intValue > 230) intValue = 230;
-                weightInt.value = intValue;
+                // 验证输入值
+                if (isNaN(value) || value < 0.01) value = 0.01;
+                if (value > 230) value = 230;
                 
-                // 验证小数部分
-                if (isNaN(decValue) || decValue < 0) decValue = 0;
-                if (decValue > 99) decValue = 99;
-                weightDec.value = decValue;
-                
-                // 组合成总重量
-                const totalWeight = intValue + (decValue / 10);
+                // 确保是0.1的倍数
+                const roundedValue = Math.round(value * 10) / 10;
+                weightInput.value = roundedValue;
                 
                 // 更新滑块
-                const sliderValue = Math.round(totalWeight * 10) / 10;
-                weightSlider.value = sliderValue;
+                weightSlider.value = roundedValue;
                 
                 calculatePrice();
-            }
+            });
+            
+            // 重量增加按钮事件
+            weightUp.addEventListener('click', () => {
+                let value = parseFloat(weightInput.value);
+                value += 0.1;
+                
+                // 验证输入值
+                if (value > 230) value = 230;
+                
+                // 确保是0.1的倍数
+                const roundedValue = Math.round(value * 10) / 10;
+                weightInput.value = roundedValue;
+                
+                // 更新滑块
+                weightSlider.value = roundedValue;
+                
+                calculatePrice();
+            });
+            
+            // 重量减少按钮事件
+            weightDown.addEventListener('click', () => {
+                let value = parseFloat(weightInput.value);
+                value -= 0.1;
+                
+                // 验证输入值
+                if (value < 0.01) value = 0.01;
+                
+                // 确保是0.1的倍数
+                const roundedValue = Math.round(value * 10) / 10;
+                weightInput.value = roundedValue;
+                
+                // 更新滑块
+                weightSlider.value = roundedValue;
+                
+                calculatePrice();
+            });
             
             // 基础突变按钮事件
             mutationBtns.forEach(btn => {
@@ -716,6 +742,18 @@
                     calculatePrice();
                 });
             });
+            
+            // 更新勾选天气数量显示
+            function updateWeatherCount() {
+                let checkedCount = 0;
+                weatherCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) checkedCount++;
+                });
+                const weatherCountEl = document.getElementById('weatherCount');
+                if (weatherCountEl) {
+                    weatherCountEl.textContent = `已勾选${checkedCount}个天气`;
+                }
+            }
             
             // 天气复选框事件
             weatherCheckboxes.forEach(checkbox => {
@@ -759,16 +797,36 @@
                         }
                     }
                     
+                    // 更新勾选数量
+                    updateWeatherCount();
                     calculatePrice();
                 });
             });
             
+            // 初始更新勾选数量
+            updateWeatherCount();
+            
             // 天气预设按钮事件
-        preset1Btn.addEventListener('click', () => applyWeatherPreset('preset1'));
-        preset2Btn.addEventListener('click', () => applyWeatherPreset('preset2'));
-        preset3Btn.addEventListener('click', () => applyWeatherPreset('preset3'));
-        presetFullBtn.addEventListener('click', () => applyWeatherPreset('presetFull'));
-        clearWeatherBtn.addEventListener('click', clearAllWeather);
+        preset1Btn.addEventListener('click', () => {
+            applyWeatherPreset('preset1');
+            updateWeatherCount();
+        });
+        preset2Btn.addEventListener('click', () => {
+            applyWeatherPreset('preset2');
+            updateWeatherCount();
+        });
+        preset3Btn.addEventListener('click', () => {
+            applyWeatherPreset('preset3');
+            updateWeatherCount();
+        });
+        presetFullBtn.addEventListener('click', () => {
+            applyWeatherPreset('presetFull');
+            updateWeatherCount();
+        });
+        clearWeatherBtn.addEventListener('click', () => {
+            clearAllWeather();
+            updateWeatherCount();
+        });
             
             // 保存到预设按钮事件
         saveToPreset1.addEventListener('click', () => saveCurrentWeatherToPreset('preset1'));
@@ -908,15 +966,13 @@
             weatherBonusEl.textContent = weatherBonus.toFixed(2);
             finalPriceEl.textContent = formatNumber(finalPrice);
             
-            // 根据最终价格单位更新误差提示
-            const priceText = finalPriceEl.textContent;
+            // 根据最终价格数值显示或隐藏误差提示
             const errorTip = document.getElementById('errorTip');
-            if (priceText.includes('亿')) {
-                errorTip.textContent = '有2千万左右误差';
-            } else if (priceText.includes('万')) {
+            if (finalPrice >= 10000000 && finalPrice < 100000000) {
+                errorTip.style.display = 'inline';
                 errorTip.textContent = '有2百万误差';
             } else {
-                errorTip.textContent = '有2百万误差';
+                errorTip.style.display = 'none';
             }
             
             // 价格颜色分级
